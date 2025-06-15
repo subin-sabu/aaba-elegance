@@ -24,7 +24,7 @@ app.get('/', (req,res) => {
 
 app.use('/user', userRoute);
 
-
+// global error caching middleware which collects errors thrown from App error
 app.use(ErrorHandler);
 
 app.listen(port, () => {
