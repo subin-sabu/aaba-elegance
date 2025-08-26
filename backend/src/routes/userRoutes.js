@@ -1,10 +1,31 @@
-// src/routes/user.routes.js
+// src/routes/userRoutes.js
+import express from "express";
+import { 
+  requestOtp, 
+  verifyOtp, 
+  completeSignup, 
+  loginUser, 
+  forgotPasswordReset, 
+  updateUser 
+} from "../controllers/userController.js";
+import { protect } from "../middlewares/authMiddleware.js"; 
+import { googleAuth } from "../controllers/userController.js";
 
-import { Router } from "express";
-import { getProfile } from "../controllers/user.controller.js";
 
-const userRouter = Router()
 
-userRouter.get('/profile', getProfile);
+const router = express.Router();
 
-export default userRouter;
+// Auth + Signup + Password reset
+router.post("/request-otp", requestOtp);
+router.post("/verify-otp", verifyOtp);
+router.post("/signup", completeSignup);
+router.post("/login", loginUser);
+router.post("/forgot-password", forgotPasswordReset);
+
+// Google Auth
+router.post("/google-auth", googleAuth);
+
+// Profile update
+router.put("/update", protect, updateUser);
+
+export default router;
