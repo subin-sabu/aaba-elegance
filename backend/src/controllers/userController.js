@@ -46,7 +46,7 @@ const requestOtp = async (req, res, next) => {
     const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
     await Otp.create({ email, otp, purpose, expiresAt });
 
-    await sendMail(email, "Your OTP", `Your OTP is ${otp}. Valid for 5 minutes.`);
+    await sendMail(email, "Your OTP", `Your OTP is ${otp}. \nPurpose: ${purpose}. \nValid for 5 minutes.`);
     res.json({ success: true, message: "OTP sent" });
   } catch (err) {
     next(err);

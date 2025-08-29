@@ -1,14 +1,17 @@
 import { useState } from 'react'
 import './App.css'
-import Login from './components/Login';
+import Login from './components/LoginWithGoogle';
+import OtpForm from './components/OtpForm';
 
 
 function App() {
-  const [user, setUser] = useState(0);
+  const [user, setUser] = useState(null);
 
   return (
     <>
-    <div>{JSON.stringify(user) ?? "loading..."}</div>
+    <div>{user?.name ?? "loading..."}</div>
+    <OtpForm purpose="forgot-password"/>
+    <OtpForm purpose="signup" />
     <Login setUser={setUser}/>
       
     </>
